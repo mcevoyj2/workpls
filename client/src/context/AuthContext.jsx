@@ -46,6 +46,11 @@ const updateRegisterInfo = useCallback((info) => {
         setUser(response);
     }, [registerInfo]);
 
+const logoutUser = useCallback(() => {
+    localStorage.removeItem("User");
+    setUser(null);
+}, []);
+
     return (
     <AuthContext.Provider 
         value={{
@@ -55,6 +60,7 @@ const updateRegisterInfo = useCallback((info) => {
             registerUser,
             registerError,
             isRegisterLoading,
+            logoutUser,
         }}
         >
         {children}
