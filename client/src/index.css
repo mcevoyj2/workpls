@@ -6,7 +6,7 @@ body {
     background: #495FA6;
 }
 
-.all-users {
+.possible-users {
     display: flex;
     margin-bottom: 1rem;
 
@@ -47,7 +47,7 @@ body {
     border-radius: 50%;
     background: rgb(42, 166, 42);
     position: absolute;
-    top: -30px;
+    top: -50px;
     right: -30px;
     z-index: 2;
   }
