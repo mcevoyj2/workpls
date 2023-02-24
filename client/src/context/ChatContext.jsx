@@ -9,6 +9,13 @@ export const ChatContextProvider = ({ children, user }) => {
     const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
     const [userChatError, setUserChatError] = useState(null);
     const [potentialChats, setPotentialChats] = useState([]);
+    const [currentChat, setCurrentChat] = useState(null);
+    const [messages, setMessages] = useState(null);
+    const [isMessagesLoading, setIsMessagesLoading] = useState(false);
+    const [messagesError, setMessagesError] = useState(null);
+
+        console.log("chatcurrent",currentChat)
+
 
     useEffect(() => {
         const getUsers = async() => {
@@ -47,11 +54,35 @@ export const ChatContextProvider = ({ children, user }) => {
                     return setUserChatError(response);
                 }
                 setUserChats(response);
+                
             }
         }
 
         getUserChats();
     }, [user]);
+
+    useEffect(() => {
+        const getMessages = async()=> {
+
+                setIsMessagesLoading(true);
+                setMessagesError(null);
+
+                const response = await getRequest(`${baseUrl}/messages/${currentChat?._id}`);
+
+                setIsMessagesLoading(false);
+
+                if(response.error) {
+                    return setMessagesError(response);
+                }
+                setMessages(response);
+        }
+
+        getMessages();
+    }, [currentChat]);
+
+    const updateCurrentChat = useCallback((chat) => {
+        setCurrentChat(chat);
+    }, []);
 
     const createChat = useCallback(async (firstId, secondId) => {
         const response = await postRequest(
@@ -77,6 +108,11 @@ export const ChatContextProvider = ({ children, user }) => {
         userChatError,
         potentialChats,
         createChat,
+        updateCurrentChat,
+        currentChat,
+        messages,
+        isMessagesLoading,
+        messagesError,
     }}
     >
         {children}
