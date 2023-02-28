@@ -25,7 +25,7 @@ export const useFetchRecipientUser = (chat, user) => {
 
     }, [recipientId]);
 
-    console.log(recipientUser);
+
     return { recipientUser };
     
 };
