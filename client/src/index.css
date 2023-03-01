@@ -124,7 +124,8 @@ body {
     color: white;
     cursor: pointer;
     position: relative;
-    margin-right: 1rem;
+    margin-right: .2rem;
+
   }
   
   .notifications-box {
