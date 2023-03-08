@@ -1,6 +1,7 @@
-import {Alert, Button, Form, Row, Col, Stack} from 'react-bootstrap';
+import {Alert, Button, Form, Row, Col, Stack, Container} from 'react-bootstrap';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import peerlogo from './peerlogo.png';
 
 const Login = () => {
 
@@ -14,6 +15,11 @@ const Login = () => {
 
     return ( 
     <>
+    <Container className='login-contain'>
+    <div className="brandtwo">
+        <img src={peerlogo} alt="PeerAcademy"/>
+
+    </div>
     <Form onSubmit={loginUser}>
         <Row style={{
             height: "100vh",
@@ -50,6 +56,7 @@ const Login = () => {
             </Col>
         </Row>
     </Form>
+    </Container>
     </> 
     );
 };

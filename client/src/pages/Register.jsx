@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import {Alert, Button, Form, Row, Col, Stack} from 'react-bootstrap';
+import {Alert, Button, Form, Row, Col, Stack, Container} from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
-
+import peerlogo from './peerlogo.png';
 const Register = () => {
 
     const { registerInfo,
@@ -13,7 +13,11 @@ const Register = () => {
 
     return ( 
     <>
-    <Form onSubmit={registerUser}>
+    <Container className='register-contain'>
+    <div className="brandtwo">
+        <img src={peerlogo} alt="PeerAcademy"/>
+    </div>
+    <Form className="formsize" onSubmit={registerUser}>
         <Row style={{
             height: "100vh",
             justifyContent: "center",
@@ -34,6 +38,10 @@ const Register = () => {
                         ...registerInfo, email: e.target.value })
                 }
                 />
+                <Form.Control 
+                type="sdnumber" 
+                placeholder="Student Number">
+                </Form.Control>
                 <Form.Control type="password" placeholder="Password" 
                 onChange={(e) => 
                     updateRegisterInfo({
@@ -53,6 +61,7 @@ const Register = () => {
             </Col>
         </Row>
     </Form>
+    </Container>
     </> 
     );
 };

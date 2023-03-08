@@ -9,12 +9,27 @@ const NavBar = () => {
     return ( 
     <Navbar bg="dark" className="mb-4" style={{ height: "3rem"}}>
         <Container>
+            <Stack direction="horizontal" gap={3}>
             <h2>
-                <Link to="/" className="link-light text-decoration-none" >
+                <Link to="/Home" className="link-light text-decoration-none" >
                 PeerAcademy
                 </Link>
             </h2>
-            {user && <span className="text-warning">
+            <Stack direction="vertical" gap={1}> 
+             { user && (
+                <>
+                <Link to="/ModulePage" className="link-light text-decoration-none" >Modules</Link>
+                <Link to="/" className="link-light text-decoration-none" >Chats</Link>
+                </>
+             )}
+             {!user && (
+                <></>
+             )}
+
+            </Stack>
+            </Stack>
+            {user && 
+            <span className="text-warning">
                 Logged in as {user?.name}
             </span> 
             }
