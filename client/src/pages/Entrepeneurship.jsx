@@ -39,9 +39,8 @@ const Entrepeneurship = () => {
         <p className="insidecardstyle">
         On successful completion of this module, students will be able to 
         Explain how high tech venture creation operates,
-        Understand and give examples of some of the basic skills needed to recognise and nurture commercial opportunities, 
-        Describe how high-tech industry in general and ICT in particular has evolved and continues to evolve,
-        Give oral presentations and engage in in-class discussion and
+        Understand and give examples of some of the basic skills needed to recognise commercial opportunities, 
+        Describe how high-tech industry in general and ICT in particular has evolved and continues to evolve and
         Describe a product or service to a non-technical audience.
         </p>
         <h6 className="descriptorofmodule">Module Coordinator</h6>
@@ -59,9 +58,11 @@ const Entrepeneurship = () => {
         </p>
         </Card>
         </div>
-        <div className="ms-auto">
+        <Card className="mathingcard ms-auto">
+        <div>
             Matching goes here
         </div>
+        </Card>
         </Stack>
     </div>
     );

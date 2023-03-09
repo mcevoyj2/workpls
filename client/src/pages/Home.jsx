@@ -1,7 +1,15 @@
+import { useContext } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import UserChat from "../components/chat/UserChat";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/chatContext";
 
 const Home = () => {
+    const { user } = useContext(AuthContext);
+
+    const { userChats, isUserChatsLoading, updateCurrentChat
+    } = useContext(ChatContext);
     return ( 
     <div>
         <h3 style={{color: "#000"}}>PeerAcademy - Students helping Students</h3>
@@ -11,17 +19,36 @@ const Home = () => {
             with within the course. 
         </h5>
         <br></br>
-        <Stack direction="horizontal" gap={3}>
-        <Link to="/" className="link-light text-decoration-none " >
-            Chats
-        </Link>
-        <Link to="/ModulePage" className="link-light text-decoration-none ms-auto" >
-                <h4 className="namebroname">Modules Page</h4>
-        </Link> 
-        </Stack>
-        <Stack direction="horizontal" gap={3}>
-            <h3>Chats will go here</h3>
 
+        <Stack direction="horizontal" gap={3}>
+        <Stack direction="vertical" gap={3}>
+        <Link to="/" className="link-light text-decoration-none " >
+        <h4 className="namebroname">Chats</h4>
+        </Link>
+            <Card className="card-all-three">
+        {userChats?.length < 1 ? null : (
+        <Stack direction="horizontal" gap={4} className="align-items-start">
+            <Stack className="messages-box flex-grow-0 pe-3" gap={3}>
+            {isUserChatsLoading && <p>Loading chats...</p>}
+            {userChats?.map((chat,index) => {
+                return (
+                <div 
+                key={index} 
+                onClick={() => updateCurrentChat(chat)}
+                >
+                    <UserChat chat={chat} user={user}/>
+                </div>
+                );
+            })}
+            </Stack>
+            </Stack>
+            )}
+            </Card>
+            </Stack>
+            <Stack direction="vertical" gap={3}>
+            <Link to="/ModulePage" className="link-light text-decoration-none ms-auto" >
+                <h4 className="namebroname">Modules Page</h4>
+            </Link> 
             <Card className="card-all ms-auto"> 
 
             <br></br>
@@ -59,6 +86,8 @@ const Home = () => {
             STU45006 - Strategic Information Systems
             </Link>
             </Card>
+            </Stack>
+
             </Stack>
     </div> 
     );

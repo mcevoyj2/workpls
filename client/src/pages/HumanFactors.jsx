@@ -38,10 +38,8 @@ const HumanFactors = () => {
         <h6 className="descriptorofmodule">Module Content</h6>
         <p className="insidecardstyle">
         The module provides an introduction to the field of Human-Computer Interaction, 
-        focused both on understanding human interactions with technology and on the design of useful 
-        and usable interactive systems. Students will understand the main issues underlying the usability of systems, 
+        focused both on understanding human interactions with technology and on the design of usable interactive systems. Students will understand the main issues underlying the usability of systems, 
         and the main techniques and processes for interface design and evaluation. 
-        They will also gain a basic understanding of the theories which account for human performance.
         </p>
         <h6 className="descriptorofmodule">Module Coordinator</h6>
         <p className="insidecardstyle"> Dr. Gavin Doherty</p>
@@ -59,9 +57,11 @@ const HumanFactors = () => {
         </p>
         </Card>
         </div>
-        <div className="ms-auto">
+        <Card className="mathingcard ms-auto">
+        <div>
             Matching goes here
         </div>
+        </Card>
         </Stack>
     </div>
     );

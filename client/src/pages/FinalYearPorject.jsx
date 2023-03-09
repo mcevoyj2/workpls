@@ -61,9 +61,11 @@ const FinalYearProject = () => {
         </p>
         </Card>
         </div>
-        <div className="ms-auto">
+        <Card className="mathingcard ms-auto">
+        <div>
             Matching goes here
         </div>
+        </Card>
         </Stack>
     </div> 
     );

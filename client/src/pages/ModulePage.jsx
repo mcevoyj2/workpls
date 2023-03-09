@@ -1,7 +1,17 @@
+import { useContext } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import UserChat from "../components/chat/UserChat";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/chatContext";
+
 
 const ModulePage = () => {
+
+    const { user } = useContext(AuthContext);
+
+    const { userChats, isUserChatsLoading, updateCurrentChat
+    } = useContext(ChatContext);
     return ( 
     <div>
         <Card className="card-yos">
@@ -10,7 +20,30 @@ const ModulePage = () => {
         <br></br>
         <Stack direction="horizontal" gap={3}>
 
-        <Card className="card-all"> 
+        <Card className="card-all-four">
+        <Link to="/" className="link-light text-decoration-none " >
+        <h4 className="namebroname">Chats</h4>
+        </Link>
+        {userChats?.length < 1 ? null : (
+        <Stack direction="horizontal" gap={4} className="align-items-start">
+            <Stack className="messages-box flex-grow-0 pe-3" gap={3}>
+            {isUserChatsLoading && <p>Loading chats...</p>}
+            {userChats?.map((chat,index) => {
+                return (
+                <div 
+                key={index} 
+                onClick={() => updateCurrentChat(chat)}
+                >
+                    <UserChat chat={chat} user={user}/>
+                </div>
+                );
+            })}
+            </Stack>
+            </Stack>
+            )}
+            </Card>
+
+            <Card className="card-all-two ms-auto"> 
             <h3 className="namebroname">Modules</h3>
             <br></br>
             <Link to="/internetapp" className="link-light text-decoration-none" >
@@ -48,9 +81,6 @@ const ModulePage = () => {
             </Link>
 
         </Card>
-        <Link to="/" className="link-light text-decoration-none ms-auto" >
-            <h4>Chats will go here</h4>
-        </Link>
         </Stack>
     </div> 
     );

@@ -43,7 +43,6 @@ const AdvanCompLing = () => {
         Topic Modeling. The big emphasis is on unsupervised machine 
         learning, which is one trait distinguishing this from other 
         modules concerning machine learning. 
-        Another trait is the concern with data items of arbitrary length.
         </p>
         <h6 className="descriptorofmodule">Module Coordinator</h6>
         <p className="insidecardstyle">		Dr Martin Emms</p>
@@ -61,9 +60,11 @@ const AdvanCompLing = () => {
         </p>
         </Card>
         </div>
-        <div className="ms-auto">
+        <Card className="mathingcard ms-auto">
+        <div>
             Matching goes here
         </div>
+        </Card>
         </Stack>
     </div> 
     );
