@@ -17,18 +17,20 @@ import Entrepeneurship from "./pages/Entrepeneurship"
 import AdvanCompLing from "./pages/AdvanCompLing"
 import HumanFactors from "./pages/HumanFactors"
 import Strategic from "./pages/Strategic"
+import { MatchingContextProvider } from "./context/matchingContext"
 
 function App() {
   const {user} = useContext(AuthContext);
   return (
     <ChatContextProvider user = {user}>
+    <MatchingContextProvider>
     <NavBar />
     <Container>
     <Routes>
       <Route path="/" 
       element={user ? <Chat/> : <Login/>} />
       <Route path="/login" 
-      element={user ? <Chat/> : <Login/>}  />
+      element={user ? <Home/> : <Login/>}  />
       <Route path="/internetapp" 
       element={user ? <InternetApps/> : <Login/>}  />
       <Route path="/groupdesign" 
@@ -44,15 +46,16 @@ function App() {
       <Route path="/stratinfosys" 
       element={user ? <Strategic/> : <Login/>}  />
       <Route path="/Register" 
-      element={user ? <Chat/> : <Register/>}  />
+      element={user ? <Home/> : <Register/>}  />
       <Route path="/Home" 
       element={user ? <Home/> : <Login/>}  />
       <Route path="/ModulePage" 
       element={user ? <ModulePage/> : <Login/>}  />
-      <Route path="*" element={<Chat />} />
+      <Route path="*" element={<Home />} />
       
     </Routes>
     </Container>
+    </MatchingContextProvider>
     </ChatContextProvider>
   );
 }

@@ -1,6 +1,12 @@
-import { Button, Card, Stack } from "react-bootstrap";
+import { Button, Card, Form, Stack } from "react-bootstrap";
+import PotentialModuleChats from "../components/chat/PotentialModuleChats";
+import { MatchingContext } from "../context/matchingContext";
+import { useContext } from "react";
 
 const InternetApps = () => {
+
+    const { storeUnderstanding, updateUnderstanding } = useContext(MatchingContext);
+
     function getUnderstandingLevelOne() {
         document.getElementById("levelOne").innerHTML='';
         document.getElementById("levelOne").innerHTML='My understanding is Level 1, I could probably help teach others this subject.';
@@ -29,6 +35,11 @@ const InternetApps = () => {
             <p id="levelOne"></p>
             <p id="levelTwo"></p>
             <p id="levelThree"></p>
+            <Form.Control 
+                type="understanding" 
+                placeholder="Understanding Mark"
+                onChange={(e) => 
+                updateUnderstanding({...storeUnderstanding, understandingLevel: e.target.value}) }/>
             </Stack>
     <Stack direction="horizontal" gap={3}>
         <div>
@@ -58,8 +69,10 @@ const InternetApps = () => {
         </Card>
         </div>
         <Card className="mathingcard ms-auto">
+            <h4 className="yearofstudy">Possible Chats</h4>
+            <br></br>
         <div>
-            Matching goes here
+         Potential chats go here
         </div>
         </Card>
     </Stack>
@@ -67,3 +80,5 @@ const InternetApps = () => {
 }
  
 export default InternetApps;
+
+//<PotentialModuleChats />
