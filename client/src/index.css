@@ -250,6 +250,9 @@ body {
   position: fixed;
 }
 
+.formsizetwo {
+  height: fit-content;
+}
 
 .user-card .text-content {
     width: 170px;

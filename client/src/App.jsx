@@ -23,7 +23,7 @@ function App() {
   const {user} = useContext(AuthContext);
   return (
     <ChatContextProvider user = {user}>
-    <MatchingContextProvider>
+    <MatchingContextProvider user = {user}>
     <NavBar />
     <Container>
     <Routes>

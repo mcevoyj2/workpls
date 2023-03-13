@@ -1,11 +1,13 @@
-import { Button, Card, Form, Stack } from "react-bootstrap";
+import { Button, Card, Container, Form, Stack } from "react-bootstrap";
 import PotentialModuleChats from "../components/chat/PotentialModuleChats";
 import { MatchingContext } from "../context/matchingContext";
 import { useContext } from "react";
+import UnderstandingOfUser from "../components/chat/UnderstandingOfUser";
 
 const InternetApps = () => {
 
-    const { storeUnderstanding, updateUnderstanding } = useContext(MatchingContext);
+    const { storeUnderstanding, updateUnderstanding, showUnderstanding } = useContext(MatchingContext);
+    console.log("do u work bro", showUnderstanding);
 
     function getUnderstandingLevelOne() {
         document.getElementById("levelOne").innerHTML='';
@@ -22,25 +24,26 @@ const InternetApps = () => {
     return ( 
     <div>
         <Stack direction="horizontal" gap={3}>
-        <div className="dropdown">
-            <button className="dropbtn">Understanding Level</button>
-                <div className="dropdown-content">
-                    <Stack direction="vertical">
-                    <Button onClick={getUnderstandingLevelOne}>Level 1 (Good)</Button>
-                    <Button onClick={getUnderstandingLevelTwo}>Level 2 (Mediocre)</Button>
-                    <Button onClick={getUnderstandingLevelThree}>Level 3 (Poor)</Button>
-                    </Stack>
-                </div>
-            </div>
-            <p id="levelOne"></p>
-            <p id="levelTwo"></p>
-            <p id="levelThree"></p>
-            <Form.Control 
+            <Stack direction="horizontal">
+            <div>
+                {showUnderstanding?.length === 0 ? 
+                <Form className="formsizetwo">
+                <Form.Control
                 type="understanding" 
                 placeholder="Understanding Mark"
                 onChange={(e) => 
                 updateUnderstanding({...storeUnderstanding, understandingLevel: e.target.value}) }/>
+            <Button variant='primary' type='submit'>Submit</Button>
+            </Form> :
+                <div>
+                    <UnderstandingOfUser/>
+                </div>
+                }
+            </div>
             </Stack>
+            </Stack>
+            
+
     <Stack direction="horizontal" gap={3}>
         <div>
 
