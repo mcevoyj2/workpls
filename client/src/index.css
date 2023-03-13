@@ -254,6 +254,15 @@ body {
   height: fit-content;
 }
 
+.workmygoodlordpleasework {
+  color: #000000;
+}
+
+.finallybygod {
+  color: #000000;
+  font-weight: bolder;
+}
+
 .user-card .text-content {
     width: 170px;
 }

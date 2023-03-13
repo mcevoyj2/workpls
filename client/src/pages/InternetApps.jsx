@@ -3,24 +3,13 @@ import PotentialModuleChats from "../components/chat/PotentialModuleChats";
 import { MatchingContext } from "../context/matchingContext";
 import { useContext } from "react";
 import UnderstandingOfUser from "../components/chat/UnderstandingOfUser";
+import PotentialMatch from "../components/chat/PotentialMatch";
+import { AuthContext } from "../context/AuthContext";
 
 const InternetApps = () => {
-
+    const { user } = useContext(AuthContext);
     const { storeUnderstanding, updateUnderstanding, showUnderstanding } = useContext(MatchingContext);
     console.log("do u work bro", showUnderstanding);
-
-    function getUnderstandingLevelOne() {
-        document.getElementById("levelOne").innerHTML='';
-        document.getElementById("levelOne").innerHTML='My understanding is Level 1, I could probably help teach others this subject.';
-    }
-    function getUnderstandingLevelTwo() {
-        document.getElementById("levelTwo").innerHTML='';
-        document.getElementById("levelTwo").innerHTML='My understanding is Level 2, I would not be able to teach others this subject but neither do I require help.';
-    }
-    function getUnderstandingLevelThree() {
-        document.getElementById("levelThree").innerHTML='';
-        document.getElementById("levelThree").innerHTML='My understanding is Level 3, I could probably use some help with this subject.';
-    }
     return ( 
     <div>
         <Stack direction="horizontal" gap={3}>
@@ -34,10 +23,10 @@ const InternetApps = () => {
                 onChange={(e) => 
                 updateUnderstanding({...storeUnderstanding, understandingLevel: e.target.value}) }/>
             <Button variant='primary' type='submit'>Submit</Button>
-            </Form> :
-                <div>
-                    <UnderstandingOfUser/>
-                </div>
+            </Form> : 
+                    <div>
+                        <UnderstandingOfUser/>
+                    </div>   
                 }
             </div>
             </Stack>
@@ -75,7 +64,7 @@ const InternetApps = () => {
             <h4 className="yearofstudy">Possible Chats</h4>
             <br></br>
         <div>
-         Potential chats go here
+         <PotentialMatch/>
         </div>
         </Card>
     </Stack>
