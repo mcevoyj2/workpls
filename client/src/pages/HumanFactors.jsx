@@ -1,36 +1,39 @@
-import { Button, Card, Stack } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Button, Card, Form, Stack } from "react-bootstrap";
+import PotentialMatch from "../components/chat/PotentialMatch";
+import UnderstandingOfUser from "../components/chat/UnderstandingOfUser";
+import { AuthContext } from "../context/AuthContext";
+import { MatchingContext } from "../context/matchingContext";
 
 const HumanFactors = () => {
-    function getUnderstandingLevelOne() {
-        document.getElementById("levelOne").innerHTML='';
-        document.getElementById("levelOne").innerHTML='My understanding is Level 1, I could probably help teach others this subject.';
-    }
-    function getUnderstandingLevelTwo() {
-        document.getElementById("levelTwo").innerHTML='';
-        document.getElementById("levelTwo").innerHTML='My understanding is Level 2, I would not be able to teach others this subject but neither do I require help.';
-    }
-    function getUnderstandingLevelThree() {
-        document.getElementById("levelThree").innerHTML='';
-        document.getElementById("levelThree").innerHTML='My understanding is Level 3, I could probably use some help with this subject.';
-    }
+    const { user } = useContext(AuthContext);
+    const { storeUnderstanding, updateUnderstanding, showUnderstanding, } = useContext(MatchingContext);
+    const [understandingInput, setUnderstandingInput] = useState("");
     return ( 
-    <div>
+        <div>
         <Stack direction="horizontal" gap={3}>
-        <div className="dropdown">
-            <button className="dropbtn">Understanding Level</button>
-                <div className="dropdown-content">
-                    <Stack direction="vertical">
-                    <Button onClick={getUnderstandingLevelOne}>Level 1 (Good)</Button>
-                    <Button onClick={getUnderstandingLevelTwo}>Level 2 (Mediocre)</Button>
-                    <Button onClick={getUnderstandingLevelThree}>Level 3 (Poor)</Button>
-                    </Stack>
-                </div>
+            <div>
+                {showUnderstanding?.length === 0 ? 
+                <Stack direction="horizontal">
+                <Form className="formsizetwo">
+                <Form.Control 
+                placeholder="Understanding Level"
+                value={understandingInput}
+                onChange={setUnderstandingInput}
+                />
+            <Button variant='primary' type='submit'>Submit</Button>
+            </Form>
+            </Stack> : 
+                    <div>
+                        <UnderstandingOfUser/>
+                    </div>   
+                }
+                 
             </div>
-            <p id="levelOne"></p>
-            <p id="levelTwo"></p>
-            <p id="levelThree"></p>
             </Stack>
-         <Stack direction="horizontal" gap={3}>
+            
+
+    <Stack direction="horizontal" gap={3}>
         <div>
             <br></br>
         <Card className="card-descriptor">
@@ -58,12 +61,14 @@ const HumanFactors = () => {
         </Card>
         </div>
         <Card className="mathingcard ms-auto">
+            <h4 className="yearofstudy">Suggested Matches Based on Understanding</h4>
+            <br></br>
         <div>
-            Matching goes here
+         <PotentialMatch/>
         </div>
         </Card>
-        </Stack>
-    </div>
+    </Stack>
+    </div> 
     );
 }
  

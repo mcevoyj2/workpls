@@ -15,23 +15,29 @@ const GroupDesign = () => {
     }
     return ( 
 
-    <div>
+        <div>
         <Stack direction="horizontal" gap={3}>
-        <div className="dropdown">
-            <button className="dropbtn">Understanding Level</button>
-                <div className="dropdown-content">
-                    <Stack direction="vertical">
-                    <Button onClick={getUnderstandingLevelOne}>Level 1 (Good)</Button>
-                    <Button onClick={getUnderstandingLevelTwo}>Level 2 (Mediocre)</Button>
-                    <Button onClick={getUnderstandingLevelThree}>Level 3 (Poor)</Button>
-                    </Stack>
-                </div>
+            <Stack direction="horizontal">
+            <div>
+                {showUnderstanding?.length === 0 ? 
+                <Form className="formsizetwo">
+                <Form.Control 
+                placeholder="Understanding Level"
+                value={understandingInput}
+                onChange={setUnderstandingInput}
+                />
+            <Button variant='primary' type='submit'>Submit</Button>
+            </Form> : 
+                    <div>
+                        <UnderstandingOfUser/>
+                    </div>   
+                }
             </div>
-            <p id="levelOne"></p>
-            <p id="levelTwo"></p>
-            <p id="levelThree"></p>
             </Stack>
-         <Stack direction="horizontal" gap={3}>
+            </Stack>
+            
+
+    <Stack direction="horizontal" gap={3}>
         <div>
             <br></br>
         <Card className="card-descriptor">

@@ -1,15 +1,15 @@
 import { Button, Card, Container, Form, Stack } from "react-bootstrap";
 import PotentialModuleChats from "../components/chat/PotentialModuleChats";
 import { MatchingContext } from "../context/matchingContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UnderstandingOfUser from "../components/chat/UnderstandingOfUser";
 import PotentialMatch from "../components/chat/PotentialMatch";
 import { AuthContext } from "../context/AuthContext";
 
 const InternetApps = () => {
     const { user } = useContext(AuthContext);
-    const { storeUnderstanding, updateUnderstanding, showUnderstanding } = useContext(MatchingContext);
-    console.log("do u work bro", showUnderstanding);
+    const { storeUnderstanding, updateUnderstanding, showUnderstanding, } = useContext(MatchingContext);
+    const [understandingInput, setUnderstandingInput] = useState("");
     return ( 
     <div>
         <Stack direction="horizontal" gap={3}>
@@ -17,11 +17,11 @@ const InternetApps = () => {
             <div>
                 {showUnderstanding?.length === 0 ? 
                 <Form className="formsizetwo">
-                <Form.Control
-                type="understanding" 
-                placeholder="Understanding Mark"
-                onChange={(e) => 
-                updateUnderstanding({...storeUnderstanding, understandingLevel: e.target.value}) }/>
+                <Form.Control 
+                placeholder="Understanding Level"
+                value={understandingInput}
+                onChange={setUnderstandingInput}
+                />
             <Button variant='primary' type='submit'>Submit</Button>
             </Form> : 
                     <div>
@@ -61,16 +61,16 @@ const InternetApps = () => {
         </Card>
         </div>
         <Card className="mathingcard ms-auto">
-            <h4 className="yearofstudy">Possible Chats</h4>
+            <h4 className="yearofstudy">Suggested Matches Based on Understanding</h4>
             <br></br>
         <div>
          <PotentialMatch/>
         </div>
         </Card>
     </Stack>
-    </div> );
+    </div> 
+    );
 }
  
 export default InternetApps;
 
-//<PotentialModuleChats />

@@ -6,6 +6,14 @@ const PotentialMatch = () => {
     console.log("plsgodpls", potentialMatch)
     return ( 
     <>
+    <div>
+    <ul>
+        {potentialMatch.map((match) => (
+          <li key={match.user._id}>{match.user.name}</li>
+        ))}
+      </ul>
+    </div>
+
     </>
     );
 }
