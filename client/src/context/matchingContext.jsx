@@ -12,6 +12,10 @@ export const MatchingContextProvider = ({ children, user }) => {
     const [understandingError, setUnderstandingError] = useState(null);
     const [potentialMatch, setPotentialMatch] = useState([]);
     const [potentialMatchesWithUsers, setPotentialMatchesWithUsers] = useState([]);
+    const [userUnderstanding, setUserUnderstanding] = useState(null);
+    const [newUnderstanding, setNewUnderstanding] = useState(null);
+
+
 
     
 
@@ -21,6 +25,14 @@ export const MatchingContextProvider = ({ children, user }) => {
           if (response.error) {
             return console.log(response);
           }
+          const currentUserResponse = await getRequest(`${baseUrl}/understandings/${user?._id}`);
+          if (currentUserResponse.error) {
+            return console.log(currentUserResponse);
+          }
+          if (currentUserResponse.length === 0) {
+            return;
+          }
+          const currentUserUnderstandingUser = currentUserResponse[0]?.understandingUser;
           const potentialForMatches = [];
           for (const u of response) {
             if (user?._id === u._id) {
@@ -37,11 +49,31 @@ export const MatchingContextProvider = ({ children, user }) => {
             };
             potentialForMatches.push(match);
           }
-          console.log("PotentialMatches", potentialForMatches);
-          setPotentialMatch(potentialForMatches);
+          const potentialMatchesWithUnderstanding = potentialForMatches.filter(match => match.understanding[0]?.understandingUser !== currentUserUnderstandingUser);
+          console.log("PotentialMatches", potentialMatchesWithUnderstanding);
+          setPotentialMatch(potentialMatchesWithUnderstanding);
         };
         getUsers();
       }, [user]);
+      
+      const createUnderstanding = useCallback(
+        async (currentUserId, understandingOfCurrentUser, setUnderstandingOfCurrentUser) => {
+        const response = await postRequest(
+            `${baseUrl}/understandings`,
+            JSON.stringify({
+            userId: currentUserId, 
+            understandingUser : understandingOfCurrentUser
+        })
+        );
+
+        if(response.error) {
+            return console.log("error creating understanding data ", response);
+        }
+        setNewUnderstanding(response);
+        setUserUnderstanding(response);
+        setUnderstandingOfCurrentUser = "";
+    }, []);
+
       
       
         
@@ -75,6 +107,7 @@ export const MatchingContextProvider = ({ children, user }) => {
         updateUnderstanding,
         showUnderstanding,
         potentialMatch,
+        createUnderstanding,
     }}
     >
         {children}

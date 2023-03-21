@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const InternetApps = () => {
     const { user } = useContext(AuthContext);
-    const { storeUnderstanding, updateUnderstanding, showUnderstanding, } = useContext(MatchingContext);
+    const { storeUnderstanding, updateUnderstanding, showUnderstanding, createUnderstanding } = useContext(MatchingContext);
     const [understandingInput, setUnderstandingInput] = useState("");
     return ( 
     <div>
@@ -16,14 +16,17 @@ const InternetApps = () => {
             <Stack direction="horizontal">
             <div>
                 {showUnderstanding?.length === 0 ? 
-                <Form className="formsizetwo">
-                <Form.Control 
-                placeholder="Understanding Level"
-                value={understandingInput}
-                onChange={setUnderstandingInput}
-                />
-            <Button variant='primary' type='submit'>Submit</Button>
-            </Form> : 
+                <div className="dropdown">
+                <button className="dropbtn">Understanding Level</button>
+                <div className="dropdown-content">
+                <Stack direction="vertical">
+                <Button onClick={createUnderstanding}>Level 1 (Good)</Button>
+                <Button >Level 2 (Mediocre)</Button>
+                <Button >Level 3 (Poor)</Button>
+                </Stack>
+                </div>
+                </div>
+             : 
                     <div>
                         <UnderstandingOfUser/>
                     </div>   
