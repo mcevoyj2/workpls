@@ -56,13 +56,14 @@ export const MatchingContextProvider = ({ children, user }) => {
       }, [user]);
       
       const createUnderstanding = useCallback(
-        async (userId, understandingUser) => {
+        async (understandPls, userId, setUnderstandPls) => {
+          if(!understandPls) return console.log("No understanding selected");
         const response = await 
         postRequest(
             `${baseUrl}/understandings`,
             JSON.stringify({
             userId, 
-            understandingUser
+            understandingUser: understandPls,
         })
         );
 
@@ -70,6 +71,7 @@ export const MatchingContextProvider = ({ children, user }) => {
             return console.log(response);
         }
         setNewUnderstanding(response);
+        setUnderstandPls("");
     }, []);
 
     
