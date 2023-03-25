@@ -65,10 +65,15 @@ const InternetApps = () => {
         <Card className="mathingcard ms-auto">
             <h4 className="yearofstudy">Suggested Matches Based on Understanding</h4>
             <br></br>
+        {showUnderstanding?.length === 0 ? 
+        <p>Please click on the button to enter your level of understanding </p>
+        :
         <div>
          <PotentialMatch/>
         </div>
+}
         </Card>
+
     </Stack>
     </div> 
     );
