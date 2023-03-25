@@ -12,12 +12,9 @@ export const MatchingContextProvider = ({ children, user }) => {
     const [understandingError, setUnderstandingError] = useState(null);
     const [potentialMatch, setPotentialMatch] = useState([]);
     const [potentialMatchesWithUsers, setPotentialMatchesWithUsers] = useState([]);
-    const [understandPls, setUnderstandPls] = useState("");
     const [newUnderstanding, setNewUnderstanding] = useState(null);
+    const [understandPls, setUnderstandPls] = useState("");
 
-
-
-    
 
     useEffect(() => {
         const getUsers = async () => {
@@ -48,7 +45,8 @@ export const MatchingContextProvider = ({ children, user }) => {
             };
             potentialForMatches.push(match);
           }
-          const potentialMatchesWithUnderstanding = potentialForMatches.filter(match => match.understanding[0]?.understandingUser !== currentUserUnderstandingUser);
+          const potentialMatchesWithUnderstanding = potentialForMatches.filter
+          (match => match.understanding[0]?.understandingUser !== currentUserUnderstandingUser);
           console.log("PotentialMatches", potentialMatchesWithUnderstanding);
           setPotentialMatch(potentialMatchesWithUnderstanding);
         };
@@ -56,14 +54,14 @@ export const MatchingContextProvider = ({ children, user }) => {
       }, [user]);
       
       const createUnderstanding = useCallback(
-        async (understandPls, userId, setUnderstandPls) => {
-          if(!understandPls) return console.log("No understanding selected");
+        async (understandingUser, userId, setUnderstandPls) => {
+          if(!understandingUser) return console.log("No understanding selected");
         const response = await 
         postRequest(
             `${baseUrl}/understandings`,
             JSON.stringify({
             userId, 
-            understandingUser: understandPls,
+            understandingUser,
         })
         );
 
@@ -106,6 +104,7 @@ export const MatchingContextProvider = ({ children, user }) => {
         potentialMatch,
         createUnderstanding,
         newUnderstanding,
+        setUnderstandPls
     }}
     >
         {children}

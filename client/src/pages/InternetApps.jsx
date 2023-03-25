@@ -1,14 +1,13 @@
-import { Button, Card, Container, Form, Stack } from "react-bootstrap";
-import PotentialModuleChats from "../components/chat/PotentialModuleChats";
+import { Button, Card, Stack } from "react-bootstrap";
 import { MatchingContext } from "../context/matchingContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import UnderstandingOfUser from "../components/chat/UnderstandingOfUser";
 import PotentialMatch from "../components/chat/PotentialMatch";
 import { AuthContext } from "../context/AuthContext";
 
 const InternetApps = () => {
     const {user} = useContext(AuthContext);
-    const { showUnderstanding, createUnderstanding, newUnderstanding } = useContext(MatchingContext);
+    const { showUnderstanding, createUnderstanding, newUnderstanding, setUnderstandPls} = useContext(MatchingContext);
     return ( 
     <div>
         <Stack direction="horizontal" gap={3}>
@@ -19,9 +18,9 @@ const InternetApps = () => {
                 <button className="dropbtn">Understanding Level</button>
                 <div className="dropdown-content">
                 <Stack direction="vertical">
-                <Button onClick={() => createUnderstanding(user._id, newUnderstanding?.understandingUser)}>Level 1 (Good)</Button>
-                <Button onClick={() => createUnderstanding(user._id, newUnderstanding?.understandingUser)}>Level 2 (Mediocre)</Button>
-                <Button onClick={() => createUnderstanding(user._id, newUnderstanding?.understandingUser)}>Level 3 (Poor)</Button>
+                <Button onClick={() => createUnderstanding("My understanding is Level 1, I could probably help teach others this subject.", user._id, setUnderstandPls)}>Level 1 (Good)</Button>
+                <Button onClick={() => createUnderstanding("My understanding is Level 2, I could not teach this subject nor require help.", user._id, setUnderstandPls)}>Level 2 (Mediocre)</Button>
+                <Button onClick={() => createUnderstanding("My understanding is Level 3, I could probably use help in this subject", user._id, setUnderstandPls)}>Level 3 (Poor)</Button>
                 </Stack>
                 </div>
                 </div>
