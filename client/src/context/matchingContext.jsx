@@ -23,11 +23,10 @@ export const MatchingContextProvider = ({ children, user }) => {
         const getUsers = async () => {
           const response = await getRequest(`${baseUrl}/users`);
           if (response.error) {
-            return console.log(response);
           }
           const currentUserResponse = await getRequest(`${baseUrl}/understandings/${user?._id}`);
           if (currentUserResponse.error) {
-            return console.log(currentUserResponse);
+            console.log(error)
           }
           if (currentUserResponse.length === 0) {
             return;
@@ -57,21 +56,21 @@ export const MatchingContextProvider = ({ children, user }) => {
       }, [user]);
       
       const createUnderstanding = useCallback(
-        async (currentUserId, understandingOfCurrentUser, setUnderstandingOfCurrentUser) => {
-        const response = await postRequest(
+        async (userId, understandingUser) => {
+        const response = await 
+        postRequest(
             `${baseUrl}/understandings`,
             JSON.stringify({
-            userId: currentUserId, 
-            understandingUser : understandingOfCurrentUser
+            userId, 
+            understandingUser
         })
         );
 
         if(response.error) {
-            return console.log("error creating understanding data ", response);
+            return console.log(response);
         }
         setNewUnderstanding(response);
         setUserUnderstanding(response);
-        setUnderstandingOfCurrentUser = "";
     }, []);
 
       
@@ -108,6 +107,7 @@ export const MatchingContextProvider = ({ children, user }) => {
         showUnderstanding,
         potentialMatch,
         createUnderstanding,
+        newUnderstanding,
     }}
     >
         {children}

@@ -7,9 +7,8 @@ import PotentialMatch from "../components/chat/PotentialMatch";
 import { AuthContext } from "../context/AuthContext";
 
 const InternetApps = () => {
-    const { user } = useContext(AuthContext);
-    const { storeUnderstanding, updateUnderstanding, showUnderstanding, createUnderstanding } = useContext(MatchingContext);
-    const [understandingInput, setUnderstandingInput] = useState("");
+    const {user} = useContext(AuthContext);
+    const { showUnderstanding, createUnderstanding, newUnderstanding } = useContext(MatchingContext);
     return ( 
     <div>
         <Stack direction="horizontal" gap={3}>
@@ -20,9 +19,9 @@ const InternetApps = () => {
                 <button className="dropbtn">Understanding Level</button>
                 <div className="dropdown-content">
                 <Stack direction="vertical">
-                <Button onClick={createUnderstanding}>Level 1 (Good)</Button>
-                <Button >Level 2 (Mediocre)</Button>
-                <Button >Level 3 (Poor)</Button>
+                <Button onClick={() => createUnderstanding(user._id, user.understandingUser)}>Level 1 (Good)</Button>
+                <Button onClick={() => createUnderstanding(user._id, user.understandingUser)}>Level 2 (Mediocre)</Button>
+                <Button onClick={() => createUnderstanding(user._id, user.understandingUser)}>Level 3 (Poor)</Button>
                 </Stack>
                 </div>
                 </div>
