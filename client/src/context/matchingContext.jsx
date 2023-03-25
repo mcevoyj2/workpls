@@ -70,12 +70,8 @@ export const MatchingContextProvider = ({ children, user }) => {
             return console.log(response);
         }
         setNewUnderstanding(response);
-        setUserUnderstanding(response);
     }, []);
 
-      
-      
-        
     
 
     const updateUnderstanding = useCallback((info) => {

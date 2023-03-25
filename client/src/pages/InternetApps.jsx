@@ -19,7 +19,7 @@ const InternetApps = () => {
                 <button className="dropbtn">Understanding Level</button>
                 <div className="dropdown-content">
                 <Stack direction="vertical">
-                <Button onClick={() => createUnderstanding(user._id, user.understandingUser)}>Level 1 (Good)</Button>
+                <Button onClick={() => createUnderstanding(user._id, newUnderstanding?.understandingUser)}>Level 1 (Good)</Button>
                 <Button onClick={() => createUnderstanding(user._id, user.understandingUser)}>Level 2 (Mediocre)</Button>
                 <Button onClick={() => createUnderstanding(user._id, user.understandingUser)}>Level 3 (Poor)</Button>
                 </Stack>
