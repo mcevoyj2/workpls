@@ -12,7 +12,7 @@ export const MatchingContextProvider = ({ children, user }) => {
     const [understandingError, setUnderstandingError] = useState(null);
     const [potentialMatch, setPotentialMatch] = useState([]);
     const [potentialMatchesWithUsers, setPotentialMatchesWithUsers] = useState([]);
-    const [userUnderstanding, setUserUnderstanding] = useState(null);
+    const [understandPls, setUnderstandPls] = useState("");
     const [newUnderstanding, setNewUnderstanding] = useState(null);
 
 
