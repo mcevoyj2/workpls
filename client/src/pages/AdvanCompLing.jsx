@@ -6,23 +6,25 @@ import { AuthContext } from "../context/AuthContext";
 import { MatchingContext } from "../context/matchingContext";
 
 const AdvanCompLing = () => {
-    const { user } = useContext(AuthContext);
-    const { storeUnderstanding, updateUnderstanding, showUnderstanding, } = useContext(MatchingContext);
-    const [understandingInput, setUnderstandingInput] = useState("");
+    const {user} = useContext(AuthContext);
+    const { showUnderstanding, createUnderstanding, newUnderstanding, setUnderstandPls} = useContext(MatchingContext);
     return ( 
-        <div>
+    <div>
         <Stack direction="horizontal" gap={3}>
             <Stack direction="horizontal">
             <div>
                 {showUnderstanding?.length === 0 ? 
-                <Form className="formsizetwo">
-                <Form.Control 
-                placeholder="Understanding Level"
-                value={understandingInput}
-                onChange={setUnderstandingInput}
-                />
-            <Button variant='primary' type='submit'>Submit</Button>
-            </Form> : 
+                <div className="dropdown">
+                <button className="dropbtn">Understanding Level</button>
+                <div className="dropdown-content">
+                <Stack direction="vertical">
+                <Button onClick={() => createUnderstanding("My understanding is Level 1, I could probably help teach others this subject.", user._id, setUnderstandPls)}>Level 1 (Good)</Button>
+                <Button onClick={() => createUnderstanding("My understanding is Level 2, I could not teach this subject nor require help.", user._id, setUnderstandPls)}>Level 2 (Mediocre)</Button>
+                <Button onClick={() => createUnderstanding("My understanding is Level 3, I could probably use help in this subject", user._id, setUnderstandPls)}>Level 3 (Poor)</Button>
+                </Stack>
+                </div>
+                </div>
+             : 
                     <div>
                         <UnderstandingOfUser/>
                     </div>   
